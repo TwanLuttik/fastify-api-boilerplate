@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    // Allows us to use breakpoints for debugging
+    "sourceMap": true,
+    "target": "ES2020",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "noLib": false,
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "paths": {
+      "@internal/logic": [
+        "logic/index.ts"
+      ],
+      "@internal/server": [
+        "server.ts"
+      ],
+    }
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
