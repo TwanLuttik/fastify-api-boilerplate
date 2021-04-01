@@ -2,6 +2,7 @@ import { catchResponseHandler } from './logic';
 import { fast } from './index';
 import { hasPermission } from './middleware/middleware';
 import { Permissions } from './types/index';
+import { test } from './controllers/';
 
 interface IRoute {
 	path: string;
@@ -11,7 +12,9 @@ interface IRoute {
 	prefix?: string;
 }
 
-const Routes: IRoute[] = [];
+const Routes: IRoute[] = [
+	{ method: 'GET', path: '/test', handler: test.test }
+];
 
 // Register all routes from the list
 export const registerRoutes = async () => {
