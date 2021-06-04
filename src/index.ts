@@ -17,14 +17,13 @@ export const fast: FastifyInstance = fastify({ trustProxy: true });
 	registerRoutes();
 
 	// Customized logger
-	fast.addHook('onSend', (req: FastifyRequest, res: FastifyReply, payload, next) => {
+	fast.addHook('onSend', (req: FastifyRequest<any>, res: FastifyReply<any>, payload, next) => {
 		next();
 		if (req.method === 'OPTIONS') return;
 
-		const date = chalk.gray(`[${new Date().toTimeString().split(' ')[0]}]`);
-		const method = chalk.green(`[${req.method}]`);
-
-		let message = `${date} ${method} ${req.url} ${chalk.gray(`> ${req.ip}`)}`;
+		const message = `${chalk.dim(`[${new Date().toTimeString().split(' ')[0]}]`)} ${chalk.green(`[${req.method}]`)} ${chalk.yellow(
+			`[${res.statusCode}]`
+		)} ${chalk.blueBright('[' + res.getResponseTime().toFixed(2) + 'ms]')} => ${chalk.redBright(req.url)} ${chalk.white(`> ${req.ip}`)}`;
 		console.log(message);
 	});
 
@@ -34,11 +33,11 @@ export const fast: FastifyInstance = fastify({ trustProxy: true });
 		origin: true,
 	});
 
-	fast.listen(8080, '0.0.0.0', (err, address) => {
+	fast.listen(8080, 'localhost', (err, address) => {
 		if (err) throw err;
 		else
 			console.log(
-				chalk.green`\n--------------------------\n${env.IS_PRODUCTION ? chalk.yellow('RUNNING IN PRODUCTION') : ''}\nServer running. ${address}`
+				chalk.green`\n--------------------------\nServer running. ${address}${env.IS_PRODUCTION ? chalk.green('\n\nPRODUCTION MODE ENABLED') : ''}`
 			);
 	});
 })();
