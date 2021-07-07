@@ -1,26 +1,23 @@
 import { catchResponseHandler } from './logic';
 import { fast } from './index';
 import { hasPermission } from './middleware/middleware';
-import { Permissions } from './types/index';
+import { CustomRequest, Permissions } from './types/index';
 import { test } from './controllers/';
+import { FastifyReply } from 'fastify';
 
 interface IRoute {
 	path: string;
 	method: 'POST' | 'GET' | 'PATCH' | 'DELETE';
 	auth?: keyof typeof Permissions | 'SESSION';
-	handler?: any;
+	handler?: (req: CustomRequest<any>, res: FastifyReply<any>) => void;
 	prefix?: string;
 }
 
-const Routes: IRoute[] = [
-	{ method: 'GET', path: '/test', handler: test.test }
-];
+const Routes: IRoute[] = [{ method: 'GET', path: '/test', handler: test.test }];
 
 // Register all routes from the list
 export const registerRoutes = async () => {
-	// Register custom decortion
-	fast.decorateRequest('account', null);
-	fast.decorateRequest('channel_id', null);
+	// Register custom decortion => example: fast.decorateRequest('<name>', null);
 
 	// loop through the list and register the routes
 	for (let item of Routes) {
