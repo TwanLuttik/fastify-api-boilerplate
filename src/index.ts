@@ -13,9 +13,6 @@ import Cors from 'fastify-cors';
 export const fast: FastifyInstance = fastify({ trustProxy: true });
 
 (async function () {
-	// Register the routes
-	registerRoutes();
-
 	// Customized logger
 	fast.addHook('onSend', (req: FastifyRequest<any>, res: FastifyReply<any>, payload, next) => {
 		next();
@@ -27,11 +24,16 @@ export const fast: FastifyInstance = fastify({ trustProxy: true });
 		console.log(message);
 	});
 
+	// Register plugins
 	fast.register(Cors, {
 		credentials: true,
 		methods: ['GET', 'POST', 'PATCH', 'DELETE'],
 		origin: true,
 	});
+
+
+	// Register the routes
+	registerRoutes();
 
 	fast.listen(8080, 'localhost', (err, address) => {
 		if (err) throw err;
