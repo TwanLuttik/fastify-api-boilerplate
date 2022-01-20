@@ -33,8 +33,8 @@ export const customResponse = async (res: FastifyReply<any>, config: CustomRespo
 	const is_error = !!config?.error;
 
 	return res.code(is_error ? 400 : config.code ?? 200).send({
-		success: is_error ? false : config.code === 400 ? false : true,
-		data: config?.data,
+		success: is_error ? false : config.code !== 400,
+		data: config.message && !config?.data ? true : config?.data,
 		message: is_error ? config.error : config?.message,
 	});
 };

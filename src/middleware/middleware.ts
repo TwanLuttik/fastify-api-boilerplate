@@ -1,12 +1,8 @@
 import { catchResponseHandler } from '@internal/logic';
-import { CustomRequest, Permissions } from '@internal/server';
+import { CustomRequest, PermissionsType } from '@internal/server';
 import { FastifyReply } from 'fastify';
 
-export const hasPermission = async (
-	req: CustomRequest<any>,
-	res: FastifyReply<any>,
-	permission: keyof typeof Permissions | 'SESSION'
-): Promise<any> => {
+export const hasPermission = async (req: CustomRequest<any>, res: FastifyReply<any>, permission: PermissionsType): Promise<any> => {
 	try {
 		// PERMISSION LOGIC
 	} catch (error) {

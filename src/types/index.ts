@@ -1,5 +1,5 @@
 import { FastifyRequest } from 'fastify';
 
-export enum Permissions {}
+export type PermissionsType = 'SESSION';
 
 export interface CustomRequest<T> extends FastifyRequest<T> {}

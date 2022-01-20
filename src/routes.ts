@@ -1,15 +1,15 @@
 import { catchResponseHandler } from './logic';
 import { fast } from './index';
 import { hasPermission } from './middleware/middleware';
-import { CustomRequest, Permissions } from './types/index';
+import { CustomRequest, PermissionsType } from './types/index';
 import { test } from './controllers/';
 import { FastifyReply } from 'fastify';
 
 interface IRoute {
 	path: string;
 	method: 'POST' | 'GET' | 'PATCH' | 'DELETE';
-	auth?: keyof typeof Permissions | 'SESSION';
-	handler?: (req: CustomRequest<any>, res: FastifyReply<any>) => void;
+	auth?: PermissionsType;
+	handler?: (req: CustomRequest<any>, res: FastifyReply<any>) => Promise<void>;
 	prefix?: string;
 }
 
