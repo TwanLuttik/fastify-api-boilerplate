@@ -1,7 +1,7 @@
 import 'module-alias/register';
 import './config';
 
-import chalk from 'chalk';
+import colors from 'colors';
 import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
 import { env } from './server';
@@ -21,19 +21,20 @@ registerRoutes();
 		next();
 		if (req.method === 'OPTIONS') return;
 
-		const message = `${chalk.dim(`[${new Date().toTimeString().split(' ')[0]}]`)} ${chalk.green(`[${req.method}]`)} ${chalk.yellow(
+		const message = `${colors.dim(`[${new Date().toTimeString().split(' ')[0]}]`)} ${colors.green(`[${req.method}]`)} ${colors.yellow(
 			`[${res.statusCode}]`
-		)} ${chalk.blueBright('[' + res.getResponseTime().toFixed(2) + 'ms]')} => ${chalk.redBright(req.url)} ${chalk.white(`> ${req.ip}`)}`;
+		)} ${colors.blue('[' + res.getResponseTime().toFixed(2) + 'ms]')} => ${colors.red(req.url)} ${colors.white(`> ${req.ip}`)}`;
+
 		console.log(message);
 	});
 
-
-
-	fast.listen(8080, '0.0.0.0', (err, address) => {
+	fast.listen({ port: 8080, host: '0.0.0.0' }, (err, address) => {
 		if (err) throw err;
 		else
 			console.log(
-				chalk.green`\n--------------------------\nServer running. ${address}${env.IS_PRODUCTION ? chalk.green('\n\nPRODUCTION MODE ENABLED') : ''}`
+				colors.green(
+					`\n--------------------------\nServer running. ${address}${env.IS_PRODUCTION ? colors.green('\n\nPRODUCTION MODE ENABLED') : ''}`
+				)
 			);
 	});
 })();

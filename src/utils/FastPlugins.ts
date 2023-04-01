@@ -1,4 +1,4 @@
-import Cors from 'fastify-cors';
+import Cors from '@fastify/cors';
 import { fast } from '../index';
 
 fast.register(Cors, {
