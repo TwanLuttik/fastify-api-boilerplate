@@ -2,7 +2,7 @@ import { catchResponseHandler } from './logic';
 import { fast } from './index';
 import { hasPermission } from './middleware/middleware';
 import { CustomRequest, PermissionsType } from './types/index';
-import { test } from './controllers/';
+import { ping } from './controllers/';
 import { FastifyReply } from 'fastify';
 
 interface IRoute {
@@ -13,7 +13,7 @@ interface IRoute {
 	prefix?: string;
 }
 
-const Routes: IRoute[] = [{ method: 'GET', path: '/test', handler: test.test }];
+const Routes: IRoute[] = [{ method: 'GET', path: '/ping', handler: ping.ping }];
 
 // Register all routes from the list
 export const registerRoutes = async () => {

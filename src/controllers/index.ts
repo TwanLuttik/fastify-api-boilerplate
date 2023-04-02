@@ -1,1 +1,1 @@
-export * as test from './test.controller';
+export * as ping from './ping.controller';
