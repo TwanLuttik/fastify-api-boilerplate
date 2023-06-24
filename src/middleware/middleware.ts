@@ -1,6 +1,5 @@
 import { catchResponseHandler } from '@internal/logic';
-import { CustomRequest, IRoutePermission, RouteArgs } from '@internal/server';
-import { FastifyReply } from 'fastify';
+import { IRoutePermission, RouteArgs } from '@internal/server';
 
 export const permissionsHandler = async ({ req, res }: RouteArgs, permission: IRoutePermission): Promise<any> => {
 	try {
