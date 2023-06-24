@@ -1,25 +1,25 @@
 import { catchResponseHandler } from '@internal/logic';
-import { CustomRequest, PermissionsType } from '@internal/server';
+import { CustomRequest, IRoutePermission, RouteArgs } from '@internal/server';
 import { FastifyReply } from 'fastify';
 
-export const hasPermission = async (req: CustomRequest<any>, res: FastifyReply<any>, permission: PermissionsType): Promise<any> => {
+export const permissionsHandler = async ({ req, res }: RouteArgs, permission: IRoutePermission): Promise<any> => {
 	try {
-		// PERMISSION LOGIC
+		// return if no perm needed for the route
+		if (!permission) return;
+
+		// session handler
+		await authHandler({ req, res });
 	} catch (error) {
 		return catchResponseHandler(res, error);
 	}
 };
 
-interface ISession {
-	account_id: bigint;
-	permission: any;
-}
-
-const sessionCheck = async (req: CustomRequest<any>, res: FastifyReply<any>): Promise<ISession | (ISession & boolean)> => {
+const authHandler = async ({ req, res }: RouteArgs): Promise<boolean> => {
 	try {
-		// session logic
+		// handle auth logic
+
 		return;
 	} catch (error) {
-		return catchResponseHandler(res, error);
+		catchResponseHandler(res, error);
 	}
 };

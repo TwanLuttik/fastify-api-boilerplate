@@ -1,5 +1,25 @@
-import { FastifyRequest } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 
-export type PermissionsType = 'SESSION';
+export type IRoutePermission = 'USER';
 
-export interface CustomRequest<T> extends FastifyRequest<T> {}
+export interface RouteArgs {
+	req: CustomRequest;
+	res: FastifyReply<any>;
+}
+
+export interface CustomRequest extends FastifyRequest {
+	[x: string]: any;
+	body: any;
+	params: any;
+	query: any;
+	// Add custom fields to the request to able to access
+	// account?: { id: string }
+}
+
+export interface IRoute {
+	path: string;
+	method: 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT';
+	auth?: IRoutePermission;
+	handler?: (e: RouteArgs) => Promise<void>;
+	prefix?: string;
+}
