@@ -1,4 +1,4 @@
 import { IRoute } from '@internal/server';
-import { pingRoutes } from './ping';
+import { accountRoutes } from './account';
 
-export const AllServerRoutes: IRoute[] = [...pingRoutes];
+export const AllServerRoutes: IRoute[] = [...accountRoutes];

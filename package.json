@@ -11,15 +11,22 @@
 		"build": "rm -rf ./dist && tsc && rm -rf ./lib && ./node_modules/.bin/babel dist --out-dir lib",
 		"build-run": "yarn build && node ./lib/index.js",
 		"dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
-		"prod": "NODE_ENV=production tsc-watch --onSuccess \"node ./dist/index.js\""
+		"prod": "NODE_ENV=production tsc-watch --onSuccess \"node ./dist/index.js\"",
+		"docker": "docker-compose -p souraiko-dev -f docker-compose.dev.yml up"
 	},
 	"dependencies": {
-		"colors": "^1.4.0",
-		"dotenv": "^16.3.1",
-		"fastify": "^4.18.0",
 		"@fastify/cookie": "^8.3.0",
 		"@fastify/cors": "^8.3.0",
+		"@prisma/client": "^4.16.1",
+		"axios": "^1.4.0",
+		"colors": "^1.4.0",
+		"data-passthrough-filter": "^2.1.2",
+		"dotenv": "^16.3.1",
+		"fastify": "^4.18.0",
 		"module-alias": "^2.2.3",
+		"pg": "^8.11.0",
+		"prisma": "^4.16.1",
+		"stripe": "^12.10.0",
 		"tsc-watch": "^6.0.4",
 		"typescript": "^5.1.3"
 	},

@@ -13,9 +13,10 @@ export const fast: FastifyInstance = fastify({ trustProxy: true });
 require('./utils/FastPlugins');
 
 // Register the routes
-registerRoutes();
 
 (async function () {
+	registerRoutes();
+
 	// Customized logger
 	fast.addHook('onSend', (req: FastifyRequest<any>, res: FastifyReply<any>, payload, next) => {
 		next();
