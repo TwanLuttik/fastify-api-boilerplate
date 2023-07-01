@@ -12,7 +12,9 @@
 		"build-run": "yarn build && node ./lib/index.js",
 		"dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
 		"prod": "NODE_ENV=production tsc-watch --onSuccess \"node ./dist/index.js\"",
-		"docker": "docker-compose -p souraiko-dev -f docker-compose.dev.yml up"
+		"docker": "docker-compose -p souraiko-dev -f docker-compose.dev.yml up",
+		"db_migrate": "pnpm prisma migrate deploy",
+		"db_sync": "pnpm prisma db pull && pnpm prisma generate"
 	},
 	"dependencies": {
 		"@fastify/cookie": "^8.3.0",
