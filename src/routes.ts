@@ -2,7 +2,7 @@ import { fast } from './index';
 import { permissionsHandler } from './middleware/middleware';
 import { catchResponseHandler } from './logic';
 import { IRoutePermission, RouteArgs } from './types';
-import { AllServerRoutes } from './controllers';
+import { GlobalServerRoutes } from './controllers/routes';
 
 export interface IRoute {
 	path: string;
@@ -18,7 +18,7 @@ export const registerRoutes = async () => {
 	fast.decorateRequest('account', null);
 
 	// loop through the list and register the routes
-	for (let route of AllServerRoutes) {
+	for (let route of GlobalServerRoutes) {
 		fast.route({
 			// check if we have a prefix otherwise we use the default prefix
 			url: `${route.prefix ?? ''}${route.path}`,

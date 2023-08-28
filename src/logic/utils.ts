@@ -23,18 +23,28 @@ export const catchResponseHandler = (res: FastifyReply<any>, error: TrowErrorTyp
 };
 
 interface CustomResponseConfigType {
+	success?: string;
 	code?: number;
 	data?: any;
 	message?: string;
 	error?: string;
+	_headers?: any;
 }
 
 export const customResponse = async (res: FastifyReply<any>, config: CustomResponseConfigType): Promise<any> => {
-	const is_error = !!config?.error;
+	if (config.success) {
+		return res.code(200).send({
+			success: true,
+			data: config.data || true,
+			message: config.success,
+		});
+	}
 
-	return res.code(is_error ? 400 : config.code ?? 200).send({
+	const is_error = !!config?.error || false;
+
+	return res.code(config.code || (config.error && 400) || 200).send({
 		success: is_error ? false : config.code !== 400,
-		data: config.message && !config?.data ? true : config?.data,
+		data: config.data !== undefined ? config.data : false,
 		message: is_error ? config.error : config?.message,
 	});
 };

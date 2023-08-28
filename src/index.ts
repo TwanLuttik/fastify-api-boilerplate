@@ -1,21 +1,24 @@
 import 'module-alias/register';
+
+// Load the config first
 import './config';
 
-import colors from 'colors';
 import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
 import { env } from './server';
 import { registerRoutes } from './routes';
+import { registerPlugins } from './utils/FastPlugins';
+
+import colors from 'colors';
 
 export const fast: FastifyInstance = fastify({ trustProxy: true });
 
-// Plugins
-require('./utils/FastPlugins');
-
-// Register the routes
-
 (async function () {
-	registerRoutes();
+	// register plugins
+	await registerPlugins();
+
+	// Register the routes
+	await registerRoutes();
 
 	// Customized logger
 	fast.addHook('onSend', (req: FastifyRequest<any>, res: FastifyReply<any>, payload, next) => {
