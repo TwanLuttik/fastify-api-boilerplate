@@ -47,5 +47,8 @@ export const initializeServer = async (incomingConfig?: InitilizeConfig) => {
 };
 
 (function () {
+	// prevent the initialization if we passed this flag
+	if (process.argv.includes('--skipIndexStart')) return;
+
 	initializeServer();
 })();
