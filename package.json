@@ -12,9 +12,10 @@
 		"build-run": "yarn build && node ./lib/index.js",
 		"dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
 		"prod": "NODE_ENV=production tsc-watch --onSuccess \"node ./dist/index.js\"",
-		"docker": "docker-compose -p souraiko-dev -f docker-compose.dev.yml up",
+		"docker": "docker-compose -p somename-dev -f docker-compose.dev.yml up",
 		"db_migrate": "pnpm prisma migrate deploy",
-		"db_sync": "pnpm prisma db pull && pnpm prisma generate"
+		"db_sync": "pnpm prisma db pull && pnpm prisma generate",
+		"perf-test": "node ./dist/__test__/performance.test.ts"
 	},
 	"dependencies": {
 		"colors": "^1.4.0",
@@ -22,16 +23,12 @@
 		"fastify": "^4.22.0",
 		"@fastify/cookie": "^9.0.4",
 		"@fastify/cors": "^8.3.0",
-		"@prisma/client": "^4.16.1",
+		"@prisma/client": "^5.2.0",
 		"axios": "^1.4.0",
-		"colors": "^1.4.0",
 		"data-passthrough-filter": "^2.1.2",
-		"dotenv": "^16.3.1",
-		"fastify": "^4.18.0",
 		"module-alias": "^2.2.3",
 		"pg": "^8.11.0",
-		"prisma": "^4.16.1",
-		"stripe": "^12.10.0",
+		"prisma": "^2.5.0",
 		"tsc-watch": "^6.0.4",
 		"typescript": "^5.2.2"
 	},
