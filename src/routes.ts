@@ -4,18 +4,10 @@ import { catchResponseHandler } from './logic';
 import { IRoutePermission, RouteArgs } from './types';
 import { GlobalServerRoutes } from './controllers/routes';
 
-export interface IRoute {
-	path: string;
-	method: 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT';
-	auth?: IRoutePermission;
-	handler?: (e: RouteArgs) => Promise<void>;
-	prefix?: string;
-}
-
 // Register all routes from the list
 export const registerRoutes = async () => {
 	// Register custom decoration => fast.decorateRequest('<key_name>', null);
-	fast.decorateRequest('account', null);
+	// fast.decorateRequest('account', null);
 
 	// loop through the list and register the routes
 	for (let route of GlobalServerRoutes) {

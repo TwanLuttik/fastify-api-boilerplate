@@ -13,7 +13,6 @@ export interface CustomRequest extends FastifyRequest {
 	params: any;
 	query: any;
 	// Add custom fields to the request to able to access
-	// account?: { id: string }
 }
 
 export interface IRoute {
@@ -22,4 +21,9 @@ export interface IRoute {
 	auth?: IRoutePermission;
 	handler?: (e: RouteArgs) => Promise<void>;
 	prefix?: string;
+}
+
+export interface InitilizeConfig {
+	port?: number;
+	host?: string;
 }

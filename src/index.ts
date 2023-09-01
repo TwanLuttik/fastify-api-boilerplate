@@ -5,7 +5,7 @@ import './config';
 
 import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
-import { env } from './server';
+import { InitilizeConfig, env } from './server';
 import { registerRoutes } from './routes';
 import { registerPlugins } from './utils/FastPlugins';
 
@@ -13,7 +13,7 @@ import colors from 'colors';
 
 export const fast: FastifyInstance = fastify({ trustProxy: true });
 
-(async function () {
+export const initializeServer = async (incomingConfig?: InitilizeConfig) => {
 	// register plugins
 	await registerPlugins();
 
@@ -32,13 +32,20 @@ export const fast: FastifyInstance = fastify({ trustProxy: true });
 		console.log(message);
 	});
 
-	fast.listen({ port: 8080, host: '0.0.0.0' }, (err, address) => {
-		if (err) throw err;
-		else
+	fast.listen({ port: incomingConfig?.port || 8080, host: incomingConfig?.host || '0.0.0.0' }, (err, address) => {
+		if (err) {
+			throw err;
+		} else
 			console.log(
 				colors.green(
 					`\n--------------------------\nServer running. ${address}${env.IS_PRODUCTION ? colors.green('\n\nPRODUCTION MODE ENABLED') : ''}`
 				)
 			);
 	});
+
+	return true;
+};
+
+(function () {
+	initializeServer();
 })();
