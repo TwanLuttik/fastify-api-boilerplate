@@ -1,5 +1,3 @@
-import 'module-alias/register';
-
 // Load the config first
 import './config';
 
